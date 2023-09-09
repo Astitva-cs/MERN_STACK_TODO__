@@ -21,7 +21,7 @@ app.use(cors({origin:'http://localhost:3000', credentials: true}))
 app.use(cookieParser())
 
 app.use('/assets', express.static(path.join(__dirname , 'public/assets')))
-// app.use(express.static(path.join(__dirname , './client/build')))
+app.use(express.static(path.join(__dirname , './client/build')))
 
 
 const storage = multer.diskStorage({
@@ -42,13 +42,13 @@ app.use('/auth', UserRoutes)
 app.use('/task', TaskRoutes)
 //rest api
 
-app.get('/', (req,res) => {
-    res.send('This is a vercel response')
-})
-
-// app.get("*", function(req,res){
-//     res.sendFile(path.join(__dirname,"./client/build/index.html"));
+// app.get('/', (req,res) => {
+//     res.send('This is a vercel response')
 // })
+
+app.get("*", function(req,res){
+    res.sendFile(path.join(__dirname,"./client/build/index.html"));
+})
 
 dotenv.config()
 
